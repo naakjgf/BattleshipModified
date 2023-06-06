@@ -68,6 +68,11 @@ public class JsonHandler {
     return volleyArrayNode;
   }
 
+  /**
+   * creates an ObjectNode to represent a Ship object
+   * @param shipObj Ship object to be represented
+   * @return ObjectNode
+   */
   public ObjectNode createShipJson(Ship shipObj){
     ObjectMapper mapper = new ObjectMapper();
     ObjectNode ship = mapper.createObjectNode();
@@ -79,6 +84,26 @@ public class JsonHandler {
     return ship;
   }
 
+  /**
+   * Creates an ArrayNode to represent a fleet of ships
+   * @param ships ArrayList of ships
+   * @return ArrayNode of the fleet
+   */
+  public ArrayNode createFleetJson(ArrayList<Ship> ships)
+  {
+    ObjectMapper mapper = new ObjectMapper();
+    JsonNodeFactory jsonNodeFactory = mapper.getNodeFactory();
+
+    ArrayNode fleet = jsonNodeFactory.arrayNode();
+
+    for(Ship ship:ships)
+    {
+      ObjectNode shipJson = createShipJson(ship);
+      fleet.add(shipJson);
+    }
+
+    return fleet;
+  }
   //Legacy Methods
   public void handleJson(String json) {
 
