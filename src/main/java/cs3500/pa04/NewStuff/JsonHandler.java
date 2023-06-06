@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import cs3500.pa04.model.Coord;
+import cs3500.pa04.model.Ship;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,18 +43,15 @@ public class JsonHandler {
     ObjectMapper mapper = new ObjectMapper();
     ObjectNode coordinate = mapper.createObjectNode();
 
-    String xCoordinate = String.valueOf(coord.getCoordinateX());
-    String yCoordinate = String.valueOf(coord.getCoordinateY());
-
-    coordinate.put("x",xCoordinate);
-    coordinate.put("y",yCoordinate);
+    coordinate.put("x",coord.getCoordinateX());
+    coordinate.put("y",coord.getCoordinateY());
 
     return coordinate;
   }
 
   /**
    * Creates an ArrayNode object to represent a volley of shots
-   * @param shotVolley the List of all of the volley's coordinates.
+   * @param shotVolley the List of the volley's coordinates.
    * @returns an ArrayNode object
    */
   public ArrayNode createVolleyJson(ArrayList<Coord> shotVolley){
@@ -70,8 +68,18 @@ public class JsonHandler {
     return volleyArrayNode;
   }
 
+  public ObjectNode createShipJson(Ship shipObj){
+    ObjectMapper mapper = new ObjectMapper();
+    ObjectNode ship = mapper.createObjectNode();
 
+    ship.set("coord",createCoordJson(shipObj.getStartingCoord()));
+    ship.put("length",shipObj.getLocation().size());
+    ship.put("direction",shipObj.getOrientation().toString());
 
+    return ship;
+  }
+
+  //Legacy Methods
   public void handleJson(String json) {
 
   }

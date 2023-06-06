@@ -134,4 +134,9 @@ public class Ship {
       this.status = ShipStatus.SUNK;
     }
   }
+
+  public Coord getStartingCoord()
+  {
+    return locations.get(0);
+  }
 }
