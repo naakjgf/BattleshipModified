@@ -1,5 +1,8 @@
 package cs3500.pa04.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * A class representing a coordinate on the board.
  */
@@ -15,7 +18,8 @@ public class Coord {
    * @param col the column of the coordinate.
    * @param status the status of the coordinate.
    */
-  public Coord(int row, int col, CoordStatus status) {
+  @JsonCreator
+  public Coord(@JsonProperty("y") int row, @JsonProperty("x") int col, CoordStatus status) {
     if (row < 0 || col < 0) {
       throw new IllegalArgumentException("Row and column must be non-negative");
     }

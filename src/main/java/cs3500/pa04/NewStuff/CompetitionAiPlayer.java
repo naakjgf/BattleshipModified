@@ -1,5 +1,6 @@
 package cs3500.pa04.NewStuff;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cs3500.pa04.model.Board;
 import cs3500.pa04.model.Coord;
 import cs3500.pa04.model.CoordStatus;
@@ -13,10 +14,10 @@ import java.util.List;
 import java.util.Map;
 
 public class CompetitionAiPlayer implements Player {
-  private Board myBoard;
-  private Board opponentBoard;
+  private final Board myBoard;
+  private final Board opponentBoard;
   private final String name;
-  private ArrayList<Coord> previousVolleys;
+  private final ArrayList<Coord> previousVolleys;
   private ArrayList<Coord> currentVolley;
   private int shipCount;
   JsonHandler handler;
@@ -40,7 +41,7 @@ public class CompetitionAiPlayer implements Player {
    * Decides the current volley of shots to take through random number generation.
    *
    * @param boardHeight the height of the board to shoot at.
-   * @param boardWidth the width of the board to shoot at.
+   * @param boardWidth  the width of the board to shoot at.
    */
   public void decideCurrentVolley(int boardHeight, int boardWidth) {
     DecideVolley volley = new DecideVolley();
@@ -76,8 +77,8 @@ public class CompetitionAiPlayer implements Player {
    * Sets up the board for the player based on the given specifications. Placing the ships who's
    * locations are determined by another class randomly.
    *
-   * @param height the height of the board, range: [6, 15] inclusive
-   * @param width the width of the board, range: [6, 15] inclusive
+   * @param height         the height of the board, range: [6, 15] inclusive
+   * @param width          the width of the board, range: [6, 15] inclusive
    * @param specifications a map of ship type to the number of occurrences each ship should
    *                       appear on the board
    * @return a list of ships that were placed on the board.

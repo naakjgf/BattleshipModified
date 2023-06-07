@@ -15,6 +15,7 @@ public class ProxyController {
   Scanner thisScanner;
   Socket socket;
   Player player;
+
   public ProxyController(Scanner scanner, Socket socket, Player player) {
     this.thisScanner = scanner;
     this.socket = socket;
