@@ -1,6 +1,7 @@
 package cs3500.pa04.NewStuff;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.JsonNode;
 import cs3500.pa04.model.Board;
 import cs3500.pa04.model.Coord;
 import cs3500.pa04.model.CoordStatus;
@@ -9,6 +10,7 @@ import cs3500.pa04.model.Player;
 import cs3500.pa04.model.Ship;
 import cs3500.pa04.model.ShipPlacementRandomizer;
 import cs3500.pa04.model.ShipType;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -18,9 +20,9 @@ public class CompetitionAiPlayer implements Player {
   private final Board opponentBoard;
   private final String name;
   private final ArrayList<Coord> previousVolleys;
+  JsonHandler handler;
   private ArrayList<Coord> currentVolley;
   private int shipCount;
-  JsonHandler handler;
 
   /**
    * Constructs an AI player with the given height and width.
@@ -195,8 +197,81 @@ public class CompetitionAiPlayer implements Player {
    *
    * @return the opponent's board.
    */
-  public Board getOpponentBoard() {
-    return opponentBoard;
+  public String handleTakeShotsRequest(String request) throws IOException {
+    // Parse the request
+    JsonNode requestJson = JSONPlayerHandler.parseRequest(request);
+
+    // Check if the method is "take-shots"
+    if (!requestJson.get("method-name").asText().equals("take-shots")) {
+      throw new IllegalArgumentException("The request method must be 'take-shots'");
+    }
+
+    // Calculate the volley
+    decideCurrentVolley(myBoard.getBoard().length, myBoard.getBoard()[0].length);
+
+    // Generate and return the response
+    return JSONPlayerHandler.createResponseWithCoordinates("take-shots", currentVolley);
+  }
+
+  public String handleReportDamageRequest(String request) throws IOException {
+    // Parse the request
+    JsonNode requestJson = JSONPlayerHandler.parseRequest(request);
+
+    // Check if the method is "report-damage"
+    if (!requestJson.get("method-name").asText().equals("report-damage")) {
+      throw new IllegalArgumentException("The request method must be 'report-damage'");
+    }
+
+    // Extract coordinates from the request
+    List<Coord> opponentShotsOnBoard =
+        JSONPlayerHandler.getCoordinatesFromArguments(requestJson.get("arguments"));
+
+    // Report the damage
+    List<Coord> hits = reportDamage(opponentShotsOnBoard);
+
+    // Generate and return the response
+    return JSONPlayerHandler.createResponseWithCoordinates("report-damage", hits);
+  }
+
+  public String handleSuccessfulHitsRequest(String request) throws IOException {
+    // Parse the request
+    JsonNode requestJson = JSONPlayerHandler.parseRequest(request);
+
+    // Check if the method is "successful-hits"
+    if (!requestJson.get("method-name").asText().equals("successful-hits")) {
+      throw new IllegalArgumentException("The request method must be 'successful-hits'");
+    }
+
+    // Extract coordinates from the request
+    List<Coord> shotsThatHitOpponentShips =
+        JSONPlayerHandler.getCoordinatesFromArguments(requestJson.get("arguments"));
+
+    // Handle successful hits
+    successfulHits(shotsThatHitOpponentShips);
+
+    // Generate and return the response
+    return JSONPlayerHandler.createEmptyResponse("successful-hits");
+  }
+
+  public String handleEndGameRequest(String request) throws IOException {
+    // Parse the request
+    JsonNode requestJson = JSONPlayerHandler.parseRequest(request);
+
+    // Check if the method is "end-game"
+    if (!requestJson.get("method-name").asText().equals("end-game")) {
+      throw new IllegalArgumentException("The request method must be 'end-game'");
+    }
+
+    // Extract game result and reason from the request
+    JsonNode arguments = requestJson.get("arguments");
+    GameResult result = JSONPlayerHandler.stringToGameResult(arguments.get("result").asText());
+    String reason = arguments.get("reason").asText();
+
+    // End the game
+    endGame(result, reason);
+
+    // Generate and return the response
+    return JSONPlayerHandler.createEmptyResponse("end-game");
   }
 }
 
