@@ -19,12 +19,13 @@ public class Driver {
    */
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
-    System.out.println("Welcome to the WORLD OF BATTLESALVO!!!");
-    Game newBattleShipGame = new Game(scanner);
-    Socket socket = new Socket();
-    Player player = new CompetitionAiPlayer(10, 10);
-    //will make it run this bottom option if args are passed in
-    ProxyController newRemoteBattleShipGame = new ProxyController(scanner, socket, player);
-    newRemoteBattleShipGame.facilitateGame("");
+    if (args.length == 0) {
+      System.out.println("Welcome to the WORLD OF BATTLESALVO!!!");
+      Game newBattleShipGame = new Game(scanner);
+    } else {
+      Socket socket = new Socket();
+      ProxyController newRemoteBattleShipGame = new ProxyController(scanner, socket);
+      newRemoteBattleShipGame.facilitateGame("");
+    }
   }
 }

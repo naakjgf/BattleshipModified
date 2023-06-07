@@ -164,10 +164,10 @@ public class CompetitionAiPlayer implements Player {
   @Override
   public void endGame(GameResult result, String reason) {
     String message = switch (result) {
-      case PLAYERMANUAL_WINS -> "Congratulations! You've won the game. ";
-      case PLAYERAI_WINS -> "Sorry, you've lost. The AI has won the game. ";
+      case WIN -> "Congratulations! You've won the game. ";
+      case LOSS -> "Sorry, you've lost. The AI has won the game. ";
       case DRAW -> "The game is a draw. ";
-      case IN_PROGRESS -> "The game is still in progress. ";
+      default -> throw new IllegalStateException("Unexpected value: " + result);
     };
     System.out.println(message + "Reason: " + reason);
   }
