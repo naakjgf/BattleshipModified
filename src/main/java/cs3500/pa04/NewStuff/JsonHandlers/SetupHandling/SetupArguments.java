@@ -1,13 +1,15 @@
-package cs3500.pa04.NewStuff.SetupHandling;
+package cs3500.pa04.NewStuff.JsonHandlers.SetupHandling;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import cs3500.pa04.model.ShipType;
+import cs3500.pa04.model.Ship.ShipType;
 import java.util.Map;
 
 public class SetupArguments {
+  @JsonProperty("width")
   private final int width;
 
+  @JsonProperty("height")
   private final int height;
 
   @JsonProperty("fleet-spec")

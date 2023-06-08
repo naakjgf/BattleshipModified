@@ -1,4 +1,4 @@
-package cs3500.pa04.model;
+package cs3500.pa04.model.Coord;
 
 /**
  * An enum representing the status of a coordinate on the board.

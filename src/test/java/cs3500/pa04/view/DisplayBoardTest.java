@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import cs3500.pa04.model.Board;
-import cs3500.pa04.model.Coord;
-import cs3500.pa04.model.CoordStatus;
+import cs3500.pa04.model.Coord.Coord;
+import cs3500.pa04.model.Coord.CoordStatus;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

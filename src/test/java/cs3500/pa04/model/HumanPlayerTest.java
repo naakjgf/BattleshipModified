@@ -2,6 +2,11 @@ package cs3500.pa04.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import cs3500.pa04.model.Coord.Coord;
+import cs3500.pa04.model.Coord.CoordStatus;
+import cs3500.pa04.model.Players.HumanPlayer;
+import cs3500.pa04.model.Ship.Ship;
+import cs3500.pa04.model.Ship.ShipType;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;

@@ -1,10 +1,10 @@
 package cs3500.pa04.controller;
 
-import cs3500.pa04.model.AiPlayer;
-import cs3500.pa04.model.Coord;
+import cs3500.pa04.model.Players.AiPlayer;
+import cs3500.pa04.model.Coord.Coord;
 import cs3500.pa04.model.GameResult;
-import cs3500.pa04.model.HumanPlayer;
-import cs3500.pa04.model.ShipType;
+import cs3500.pa04.model.Players.HumanPlayer;
+import cs3500.pa04.model.Ship.ShipType;
 import cs3500.pa04.view.DisplayBoard;
 import cs3500.pa04.view.GameView;
 import java.util.ArrayList;

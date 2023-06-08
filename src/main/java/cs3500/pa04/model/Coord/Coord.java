@@ -1,4 +1,4 @@
-package cs3500.pa04.model;
+package cs3500.pa04.model.Coord;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

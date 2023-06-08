@@ -1,4 +1,4 @@
-package cs3500.pa04.model;
+package cs3500.pa04.model.Ship;
 
 /**
  * An enum representing the orientation of a ship.

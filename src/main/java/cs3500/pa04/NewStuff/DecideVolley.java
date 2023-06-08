@@ -1,7 +1,7 @@
 package cs3500.pa04.NewStuff;
 
 import cs3500.pa04.model.Board;
-import cs3500.pa04.model.Coord;
+import cs3500.pa04.model.Coord.Coord;
 import java.util.List;
 
 public class DecideVolley {

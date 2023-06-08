@@ -1,40 +1,35 @@
 package cs3500.pa04.NewStuff;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
+import cs3500.pa04.NewStuff.JsonHandlers.JsonHandler;
+import cs3500.pa04.NewStuff.JsonHandlers.JsonPlayerHandler;
+import cs3500.pa04.NewStuff.JsonHandlers.MessageJson;
 import cs3500.pa04.model.Board;
-import cs3500.pa04.model.Coord;
-import cs3500.pa04.model.CoordStatus;
+import cs3500.pa04.model.Coord.Coord;
+import cs3500.pa04.model.Coord.CoordStatus;
 import cs3500.pa04.model.GameResult;
-import cs3500.pa04.model.Player;
-import cs3500.pa04.model.Ship;
-import cs3500.pa04.model.ShipPlacementRandomizer;
-import cs3500.pa04.model.ShipType;
+import cs3500.pa04.model.Players.Player;
+import cs3500.pa04.model.Ship.Ship;
+import cs3500.pa04.model.Ship.ShipPlacementRandomizer;
+import cs3500.pa04.model.Ship.ShipType;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class CompetitionAiPlayer implements Player {
-  private final Board myBoard;
-  private final Board opponentBoard;
+  private Board myBoard;
+  private Board opponentBoard;
   private final String name;
   private final ArrayList<Coord> previousVolleys;
-  JsonHandler handler;
   private ArrayList<Coord> currentVolley;
   private int shipCount;
 
   /**
    * Constructs an AI player with the given height and width.
-   *
-   * @param height the height of the board
-   * @param width  the width of the board
    */
-  public CompetitionAiPlayer(int height, int width) {
-    this.handler = new JsonHandler();
+  public CompetitionAiPlayer() {
     this.name = "Admiral Ackbar (Resident AI StarWars Fanboy)";
-    this.myBoard = new Board(height, width);
-    this.opponentBoard = new Board(height, width);
     this.previousVolleys = new ArrayList<>();
     this.currentVolley = new ArrayList<>();
   }
@@ -87,6 +82,8 @@ public class CompetitionAiPlayer implements Player {
    */
   @Override
   public List<Ship> setup(int height, int width, Map<ShipType, Integer> specifications) {
+    this.myBoard = new Board(height, width);
+    this.opponentBoard = new Board(height, width);
     ShipPlacementRandomizer randomizer = new ShipPlacementRandomizer(this.myBoard);
     ArrayList<Ship> ships = randomizer.setupShips(height, width, specifications);
     myBoard.placeShips(ships);
@@ -197,81 +194,73 @@ public class CompetitionAiPlayer implements Player {
    *
    * @return the opponent's board.
    */
-  public String handleTakeShotsRequest(String request) throws IOException {
-    // Parse the request
-    JsonNode requestJson = JSONPlayerHandler.parseRequest(request);
+  public Board getOpponentBoard() {
+    return opponentBoard;
+  }
 
+  public MessageJson handleTakeShotsRequest(MessageJson request) {
     // Check if the method is "take-shots"
-    if (!requestJson.get("method-name").asText().equals("take-shots")) {
+    if (!request.messageName().equals("take-shots")) {
       throw new IllegalArgumentException("The request method must be 'take-shots'");
     }
-
     // Calculate the volley
     decideCurrentVolley(myBoard.getBoard().length, myBoard.getBoard()[0].length);
 
     // Generate and return the response
-    return JSONPlayerHandler.createResponseWithCoordinates("take-shots", currentVolley);
+    return JsonPlayerHandler.createResponseWithCoordinates("take-shots", currentVolley);
   }
 
-  public String handleReportDamageRequest(String request) throws IOException {
-    // Parse the request
-    JsonNode requestJson = JSONPlayerHandler.parseRequest(request);
-
+  public MessageJson handleReportDamageRequest(MessageJson request) {
     // Check if the method is "report-damage"
-    if (!requestJson.get("method-name").asText().equals("report-damage")) {
+    if (!request.messageName().equals("report-damage")) {
       throw new IllegalArgumentException("The request method must be 'report-damage'");
     }
 
     // Extract coordinates from the request
     List<Coord> opponentShotsOnBoard =
-        JSONPlayerHandler.getCoordinatesFromArguments(requestJson.get("arguments"));
+        JsonPlayerHandler.getCoordinatesFromArguments(request.arguments());
 
     // Report the damage
     List<Coord> hits = reportDamage(opponentShotsOnBoard);
 
     // Generate and return the response
-    return JSONPlayerHandler.createResponseWithCoordinates("report-damage", hits);
+    return JsonPlayerHandler.createResponseWithCoordinates("report-damage", hits);
   }
 
-  public String handleSuccessfulHitsRequest(String request) throws IOException {
-    // Parse the request
-    JsonNode requestJson = JSONPlayerHandler.parseRequest(request);
-
+  public MessageJson handleSuccessfulHitsRequest(MessageJson request) {
     // Check if the method is "successful-hits"
-    if (!requestJson.get("method-name").asText().equals("successful-hits")) {
+    if (!request.messageName().equals("successful-hits")) {
       throw new IllegalArgumentException("The request method must be 'successful-hits'");
     }
 
     // Extract coordinates from the request
     List<Coord> shotsThatHitOpponentShips =
-        JSONPlayerHandler.getCoordinatesFromArguments(requestJson.get("arguments"));
+        JsonPlayerHandler.getCoordinatesFromArguments(request.arguments());
 
     // Handle successful hits
     successfulHits(shotsThatHitOpponentShips);
 
     // Generate and return the response
-    return JSONPlayerHandler.createEmptyResponse("successful-hits");
+    return JsonPlayerHandler.createEmptyResponse("successful-hits");
   }
 
-  public String handleEndGameRequest(String request) throws IOException {
-    // Parse the request
-    JsonNode requestJson = JSONPlayerHandler.parseRequest(request);
-
+  public MessageJson handleEndGameRequest(MessageJson request) {
     // Check if the method is "end-game"
-    if (!requestJson.get("method-name").asText().equals("end-game")) {
+    if (!request.messageName().equals("end-game")) {
       throw new IllegalArgumentException("The request method must be 'end-game'");
     }
 
     // Extract game result and reason from the request
-    JsonNode arguments = requestJson.get("arguments");
-    GameResult result = JSONPlayerHandler.stringToGameResult(arguments.get("result").asText());
+    JsonNode arguments = request.arguments();
+    GameResult result = JsonPlayerHandler.stringToGameResult(arguments.get("result").asText());
     String reason = arguments.get("reason").asText();
 
     // End the game
     endGame(result, reason);
 
     // Generate and return the response
-    return JSONPlayerHandler.createEmptyResponse("end-game");
+    return JsonPlayerHandler.createEmptyResponse("end-game");
   }
+
 }
 

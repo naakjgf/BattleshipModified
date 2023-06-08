@@ -3,7 +3,7 @@ package cs3500.pa04.view;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import cs3500.pa04.model.ShipType;
+import cs3500.pa04.model.Ship.ShipType;
 import java.io.ByteArrayInputStream;
 import java.util.Map;
 import java.util.NoSuchElementException;

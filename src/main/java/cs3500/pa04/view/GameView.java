@@ -1,6 +1,6 @@
 package cs3500.pa04.view;
 
-import cs3500.pa04.model.ShipType;
+import cs3500.pa04.model.Ship.ShipType;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;

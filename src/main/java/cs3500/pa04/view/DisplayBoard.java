@@ -1,8 +1,8 @@
 package cs3500.pa04.view;
 
 import cs3500.pa04.model.Board;
-import cs3500.pa04.model.Coord;
-import cs3500.pa04.model.CoordStatus;
+import cs3500.pa04.model.Coord.Coord;
+import cs3500.pa04.model.Coord.CoordStatus;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;

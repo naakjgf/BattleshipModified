@@ -22,7 +22,6 @@ public class SocketReader {
 
     // Close the input stream and socket connection
     reader.close();
-    socket.close();
 
     return jsonData.toString();
   }

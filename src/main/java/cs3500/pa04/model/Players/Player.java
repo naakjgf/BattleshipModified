@@ -1,5 +1,9 @@
-package cs3500.pa04.model;
+package cs3500.pa04.model.Players;
 
+import cs3500.pa04.model.Coord.Coord;
+import cs3500.pa04.model.GameResult;
+import cs3500.pa04.model.Ship.Ship;
+import cs3500.pa04.model.Ship.ShipType;
 import java.util.List;
 import java.util.Map;
 

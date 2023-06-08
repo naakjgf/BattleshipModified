@@ -1,5 +1,8 @@
-package cs3500.pa04.model;
+package cs3500.pa04.model.Ship;
 
+import cs3500.pa04.model.Board;
+import cs3500.pa04.model.Coord.Coord;
+import cs3500.pa04.model.Coord.CoordStatus;
 import java.util.ArrayList;
 
 /**

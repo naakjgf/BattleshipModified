@@ -1,5 +1,12 @@
-package cs3500.pa04.model;
+package cs3500.pa04.model.Players;
 
+import cs3500.pa04.model.Board;
+import cs3500.pa04.model.Coord.Coord;
+import cs3500.pa04.model.Coord.CoordStatus;
+import cs3500.pa04.model.GameResult;
+import cs3500.pa04.model.Ship.Ship;
+import cs3500.pa04.model.Ship.ShipPlacementRandomizer;
+import cs3500.pa04.model.Ship.ShipType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -145,7 +152,7 @@ public class HumanPlayer implements Player {
       case PLAYERMANUAL_WINS -> "Congratulations! You've won the game. ";
       case PLAYERAI_WINS -> "Sorry, you've lost. The AI has won the game. ";
       case DRAW -> "The game is a draw. ";
-      case IN_PROGRESS -> "The game is still in progress. ";
+      default -> "The game is still in progress. ";
     };
     System.out.println(message + "Reason: " + reason);
   }
