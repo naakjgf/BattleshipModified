@@ -39,9 +39,8 @@ public class SetupHandler {
 
       return new MessageJson("setup", fleetArgumentsNode);
     } catch (JsonProcessingException e) {
-      System.out.println("Failed due to:" + e);
+      throw new RuntimeException(e);
     }
-    return null;
   }
 }
 
