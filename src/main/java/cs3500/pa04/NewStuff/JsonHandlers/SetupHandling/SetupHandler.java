@@ -7,8 +7,10 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import cs3500.pa04.NewStuff.CompetitionAiPlayer;
 import cs3500.pa04.NewStuff.JsonHandlers.MessageJson;
 import cs3500.pa04.model.Ship.Ship;
+import cs3500.pa04.model.Ship.ShipInformation;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SetupHandler {
   private final ObjectMapper objectMapper;
@@ -27,7 +29,12 @@ public class SetupHandler {
       List<Ship> ships = competitionAiPlayer.setup(setupArguments.getHeight(),
           setupArguments.getWidth(), setupArguments.getFleetSpec());
 
-      FleetArguments fleetArguments = new FleetArguments(ships);
+      // Convert Ships to ShipInformation objects
+      List<ShipInformation> shipInformationList = ships.stream()
+          .map(Ship::toShipInformation)
+          .collect(Collectors.toList());
+
+      FleetArguments fleetArguments = new FleetArguments(shipInformationList);
       ObjectNode fleetArgumentsNode = objectMapper.valueToTree(fleetArguments);
 
       return new MessageJson("setup", fleetArgumentsNode);

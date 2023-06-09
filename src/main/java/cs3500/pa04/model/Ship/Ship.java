@@ -10,17 +10,17 @@ import java.util.ArrayList;
  */
 public class Ship {
   private final ShipType type;
-  private ArrayList<Coord> locations;
   private final Orientation orientation;
+  private ArrayList<Coord> locations;
   private ShipStatus status;
 
   /**
    * Constructs a ship with the given type, starting coordinate, orientation, and board.
    *
-   * @param type the type of the ship.
-   * @param coord the starting coordinate of the ship.
+   * @param type        the type of the ship.
+   * @param coord       the starting coordinate of the ship.
    * @param orientation the orientation of the ship.
-   * @param board the board on which the ship is placed.
+   * @param board       the board on which the ship is placed.
    */
   public Ship(ShipType type, Coord coord, Orientation orientation, Board board) {
     this.type = type;
@@ -55,11 +55,23 @@ public class Ship {
   }
 
   /**
+   * Sets the locations of the ship based on given coordinates.
+   *
+   * @param coords the coordinates which will hold this ship.
+   */
+  public void setLocation(ArrayList<Coord> coords) {
+    for (Coord thisCoord : coords) {
+      thisCoord.setStatus(CoordStatus.SHIP);
+    }
+    this.locations = coords;
+  }
+
+  /**
    * Calculates the coordinates of the ship based on the starting coordinate and orientation. Used
    * for calculation purposes mainly as the name implies, not for setting the locations of the ship.
    *
    * @param startCoord the starting coordinate of the ship.
-   * @param board the board on which the ship is placed.
+   * @param board      the board on which the ship is placed.
    * @return an ArrayList of the Coordinates which hold this ship.
    */
   public ArrayList<Coord> calculateShipCoords(Coord startCoord, Board board) {
@@ -77,18 +89,6 @@ public class Ship {
     }
 
     return shipCoords;
-  }
-
-  /**
-   * Sets the locations of the ship based on given coordinates.
-   *
-   * @param coords the coordinates which will hold this ship.
-   */
-  public void setLocation(ArrayList<Coord> coords) {
-    for (Coord thisCoord : coords) {
-      thisCoord.setStatus(CoordStatus.SHIP);
-    }
-    this.locations = coords;
   }
 
   /**
@@ -138,8 +138,25 @@ public class Ship {
     }
   }
 
-  public Coord getStartingCoord()
-  {
+  /**
+   * Gets the length of the ship.
+   *
+   * @return an int representing the length of the ship.
+   */
+  public int getShipLength() {
+    return this.type.getLength();
+  }
+
+  /**
+   * Gets the starting coordinate of the ship.
+   *
+   * @return the starting coordinate of the ship.
+   */
+  public Coord getStartingCoord() {
     return locations.get(0);
+  }
+
+  public ShipInformation toShipInformation() {
+    return new ShipInformation(this.getStartingCoord(), this.getShipLength(), this.getOrientation().toString());
   }
 }

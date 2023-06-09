@@ -44,7 +44,7 @@ public class JsonPlayerHandler {
   public static GameResult stringToGameResult(String result) {
     return switch (result.toUpperCase()) {
       case "WIN" -> GameResult.WIN;
-      case "LOSS" -> GameResult.LOSS;
+      case "LOSE" -> GameResult.LOSE;
       case "DRAW" -> GameResult.DRAW;
       default -> throw new IllegalArgumentException("Invalid game result: " + result);
     };

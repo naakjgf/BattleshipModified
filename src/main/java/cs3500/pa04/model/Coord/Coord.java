@@ -1,6 +1,7 @@
 package cs3500.pa04.model.Coord;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -36,6 +37,7 @@ public class Coord {
    *
    * @return an int representing the x coordinate of the Coord.
    */
+  @JsonProperty("x")
   public int getCoordinateX() {
     return coordinateX;
   }
@@ -45,6 +47,7 @@ public class Coord {
    *
    * @return an int representing the y coordinate of the Coord.
    */
+  @JsonProperty("y")
   public int getCoordinateY() {
     return coordinateY;
   }
@@ -54,6 +57,7 @@ public class Coord {
    *
    * @return a CoordStatus representing the status of the Coord.
    */
+  @JsonIgnore
   public CoordStatus getStatus() {
     return status;
   }

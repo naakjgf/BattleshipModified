@@ -1,7 +1,6 @@
 package cs3500.pa04.NewStuff;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import cs3500.pa04.NewStuff.JsonHandlers.JsonHandler;
 import cs3500.pa04.NewStuff.JsonHandlers.JsonPlayerHandler;
 import cs3500.pa04.NewStuff.JsonHandlers.MessageJson;
 import cs3500.pa04.model.Board;
@@ -12,7 +11,6 @@ import cs3500.pa04.model.Players.Player;
 import cs3500.pa04.model.Ship.Ship;
 import cs3500.pa04.model.Ship.ShipPlacementRandomizer;
 import cs3500.pa04.model.Ship.ShipType;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -28,8 +26,8 @@ public class CompetitionAiPlayer implements Player {
   /**
    * Constructs an AI player with the given height and width.
    */
-  public CompetitionAiPlayer() {
-    this.name = "Admiral Ackbar (Resident AI StarWars Fanboy)";
+  public CompetitionAiPlayer(String name) {
+    this.name = name;
     this.previousVolleys = new ArrayList<>();
     this.currentVolley = new ArrayList<>();
   }
@@ -164,7 +162,7 @@ public class CompetitionAiPlayer implements Player {
   public void endGame(GameResult result, String reason) {
     String message = switch (result) {
       case WIN -> "Congratulations! You've won the game. ";
-      case LOSS -> "Sorry, you've lost. The AI has won the game. ";
+      case LOSE -> "Sorry, you've lost. The AI has won the game. ";
       case DRAW -> "The game is a draw. ";
       default -> throw new IllegalStateException("Unexpected value: " + result);
     };
