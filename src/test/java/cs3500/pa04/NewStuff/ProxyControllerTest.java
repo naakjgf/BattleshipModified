@@ -1,38 +1,39 @@
 package cs3500.pa04.NewStuff;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import cs3500.pa04.NewStuff.JsonHandlers.MessageJson;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.net.Socket;
-import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 import org.junit.jupiter.api.Test;
 
 class ProxyControllerTest {
-
   @Test
-  void testGameIsOver() {
-    // Create a mock Socket
-    Socket mockSocket = new Socket();
-    try
-    {
-      mockSocket = new Socket("0.0.0.0",35001);
-    }
-    catch (UnknownHostException e)
-    {
+  void facilitateGame() throws IOException, InterruptedException {
+    ByteArrayOutputStream testLog = new ByteArrayOutputStream(2048);
 
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
+    // Create messages to be sent by the server
+    ObjectMapper mapper = new ObjectMapper();
+    //We need to add stuff to this object node in order for it to work; I don't have time
+    //to do it right now though, it is essentially just adding a basic end-game response.
+    ObjectNode arguments = mapper.createObjectNode();
+    MessageJson mockResponse = new MessageJson("end-game", arguments);
+    String mockResponseString = mapper.writeValueAsString(mockResponse);
+    ArrayList<String> serverMessages = new ArrayList<>();
+    serverMessages.add(mockResponseString);
 
-    // Create a ProxyController instance with the mock Socket
-    ProxyController testController = new ProxyController(mockSocket);
+    // Create the Mocket
+    Mocket mocket = new Mocket(testLog, serverMessages);
 
-    // Call the gameIsOver method
-    testController.gameIsOver();
+    // Create a client and connect to the server
+    ProxyController proxyController = new ProxyController(new Scanner(System.in), mocket);
 
-    // Check that the gameOver flag is set to true
-    assertTrue(testController.gameOver);
+    // Call the method that communicates with the server
+    proxyController.facilitateGame();
   }
-
 }

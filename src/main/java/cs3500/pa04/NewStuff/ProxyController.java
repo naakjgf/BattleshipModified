@@ -7,12 +7,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import cs3500.pa04.NewStuff.JsonHandlers.JsonHandler;
 import cs3500.pa04.NewStuff.JsonHandlers.MessageJson;
-import cs3500.pa04.model.Board;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.PrintStream;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
@@ -71,8 +69,6 @@ public class ProxyController {
     gameOver = true;
   }
 
-  //Need to make it return to the server
-  //Need to make it return to the server
   public void sendResponse(MessageJson responseJson) {
     System.out.println("it reached sendResponse");
     String methodName = responseJson.messageName();
