@@ -1,14 +1,11 @@
 package cs3500.pa04.NewStuff;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import cs3500.pa04.NewStuff.JsonHandlers.MessageJson;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import org.junit.jupiter.api.Test;
 
@@ -22,6 +19,8 @@ class ProxyControllerTest {
     //We need to add stuff to this object node in order for it to work; I don't have time
     //to do it right now though, it is essentially just adding a basic end-game response.
     ObjectNode arguments = mapper.createObjectNode();
+    arguments.put("result", "win");
+    arguments.put("reason", "You sank all of the opposing ships!");
     MessageJson mockResponse = new MessageJson("end-game", arguments);
     String mockResponseString = mapper.writeValueAsString(mockResponse);
     ArrayList<String> serverMessages = new ArrayList<>();
