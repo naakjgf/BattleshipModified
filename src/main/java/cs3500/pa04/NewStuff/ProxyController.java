@@ -20,19 +20,17 @@ import java.util.Scanner;
 public class ProxyController {
   private CompetitionAiPlayer aiPlayer;
   private JsonHandler handler;
-  private Scanner thisScanner;
   private Socket server;
   private final InputStream in;
   OutputStream outputStream;
   private final ObjectMapper mapper = new ObjectMapper();
   private JsonHandler jsonHandler;
-  private boolean gameOver;
+  protected boolean gameOver;
   OutputStreamWriter writer;
 
 
-  public ProxyController(Scanner scanner, Socket socket) {
+  public ProxyController(Socket socket) {
     this.aiPlayer = new CompetitionAiPlayer("Admiral Ackbar (Resident AI StarWars Fanboy)");
-    this.thisScanner = scanner;
     this.gameOver = false;
     jsonHandler = new JsonHandler(socket, aiPlayer);
     try {
@@ -43,7 +41,6 @@ public class ProxyController {
     } catch (IOException e) {
       throw new IllegalStateException("Error: " + e.getMessage());
     }
-    this.server = socket;
   }
 
   public void facilitateGame() {

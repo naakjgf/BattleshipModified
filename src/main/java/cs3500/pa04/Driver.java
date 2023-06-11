@@ -23,7 +23,7 @@ public class Driver {
     } else {
       try {
         Socket socket = new Socket(args[0], Integer.parseInt(args[1]));
-        ProxyController newRemoteBattleShipGame = new ProxyController(scanner, socket);
+        ProxyController newRemoteBattleShipGame = new ProxyController(socket);
         newRemoteBattleShipGame.facilitateGame();
       } catch (IOException e) {
         System.out.println("Error: " + e.getMessage());
