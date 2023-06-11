@@ -54,7 +54,7 @@ public class ProxyController {
           sendResponse(jsonHandler.delegateMessage(message));
         } catch (MismatchedInputException e) {
           System.out.println("Waiting for data...");
-          sleep(1000);
+          sleep(500);
         }
       }
       try {
@@ -68,15 +68,10 @@ public class ProxyController {
     }
   }
 
-  public void gameIsOver() {
-    gameOver = true;
-  }
-
   public void sendResponse(MessageJson responseJson) {
-    System.out.println("it reached sendResponse");
     String methodName = responseJson.messageName();
     if (methodName.equalsIgnoreCase("end-game")) {
-      gameIsOver();
+      gameOver = true;
     }
     // Send the JSON string to the server
     try {
@@ -87,6 +82,5 @@ public class ProxyController {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    System.out.println(responseJson);
   }
 }

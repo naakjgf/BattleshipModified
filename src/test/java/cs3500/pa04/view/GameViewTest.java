@@ -40,11 +40,15 @@ class GameViewTest {
     String simulatedUserInput2 = "\n1\n1\n2\n3\n";
     Scanner scanner = new Scanner(new ByteArrayInputStream(simulatedUserInput.getBytes()));
     Scanner scanner2 = new Scanner(new ByteArrayInputStream(simulatedUserInput2.getBytes()));
-    assertThrows(NoSuchElementException.class, () -> gameView.getShipTypes(scanner, 6));
-    Map<ShipType, Integer> shipTypes = gameView.getShipTypes(scanner2, 6);
-    assertEquals(Integer.valueOf(1), shipTypes.get(ShipType.CARRIER));
+    Map<ShipType, Integer> shipTypes = gameView.getShipTypes(scanner, 4);
+    Map<ShipType, Integer> shipTypes2 = gameView.getShipTypes(scanner2, 6);
+    assertEquals(Integer.valueOf(1), shipTypes2.get(ShipType.CARRIER));
+    assertEquals(Integer.valueOf(1), shipTypes2.get(ShipType.BATTLESHIP));
+    assertEquals(Integer.valueOf(2), shipTypes2.get(ShipType.DESTROYER));
+    assertEquals(Integer.valueOf(1), shipTypes.get(ShipType.SUBMARINE));
+    assertEquals(Integer.valueOf(1), shipTypes.get(ShipType.DESTROYER));
     assertEquals(Integer.valueOf(1), shipTypes.get(ShipType.BATTLESHIP));
-    assertEquals(Integer.valueOf(2), shipTypes.get(ShipType.DESTROYER));
+    assertEquals(Integer.valueOf(1), shipTypes.get(ShipType.CARRIER));
   }
 
   @Test
