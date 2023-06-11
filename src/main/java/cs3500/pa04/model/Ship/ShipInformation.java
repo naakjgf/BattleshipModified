@@ -28,17 +28,5 @@ public class ShipInformation {
   public String getDirection() {
     return direction;
   }
-
-  public void setCoord(Coord coord) {
-    this.coord = coord;
-  }
-
-  public void setLength(int length) {
-    this.length = length;
-  }
-
-  public void setDirection(String direction) {
-    this.direction = direction;
-  }
 }
 
