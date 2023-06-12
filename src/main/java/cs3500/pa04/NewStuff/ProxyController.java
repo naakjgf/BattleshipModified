@@ -15,6 +15,9 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
+/**
+ * Controller that handles input from a server
+ */
 public class ProxyController {
   private CompetitionAiPlayer aiPlayer;
   private JsonHandler handler;
@@ -41,6 +44,9 @@ public class ProxyController {
     }
   }
 
+  /**
+   * Facilitates a game of BattleSalvo using an AIPlayer against an player from the given server.
+   */
   public void facilitateGame() {
     handler = new JsonHandler(server, aiPlayer);
     try {
@@ -65,6 +71,10 @@ public class ProxyController {
     }
   }
 
+  /**
+   * Sends a response to the server.
+   * @param responseJson
+   */
   public void sendResponse(MessageJson responseJson) {
     String methodName = responseJson.messageName();
     if (methodName.equalsIgnoreCase("end-game")) {

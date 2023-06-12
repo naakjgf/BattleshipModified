@@ -207,6 +207,7 @@ public class CompetitionAiPlayer implements Player {
     return JsonPlayerHandler.createResponseWithCoordinates("take-shots", currentVolley);
   }
 
+
   public MessageJson handleReportDamageRequest(MessageJson request) {
     // Check if the method is "report-damage"
     if (!request.messageName().equals("report-damage")) {

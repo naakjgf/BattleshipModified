@@ -6,6 +6,9 @@ import cs3500.pa04.NewStuff.JsonHandlers.SetupHandling.SetupHandler;
 import java.io.IOException;
 import java.net.Socket;
 
+/**
+ * Helps handle Json
+ */
 public class JsonHandler {
   private final Socket socket;
   private final CompetitionAiPlayer player;
@@ -15,6 +18,12 @@ public class JsonHandler {
     this.player = player;
   }
 
+  /**
+   * Identifies what the message from the server means and sends it to helper classes to be
+   * handled accordingly
+   * @param message message from the server
+   * @return MessageJson object to be sent back to the server
+   */
   public MessageJson delegateMessage(MessageJson message) {
     MessageJson returnMessage = null;
     String name = message.messageName();
