@@ -71,7 +71,7 @@ public class CompetitionAiPlayer implements Player {
   }
 
   /**
-   * Sets up the board for the player based on the given specifications. Placing the ships who's
+   * Sets up the board for the player based on the given specifications. Placing the ships whose
    * locations are determined by another class randomly.
    *
    * @param height         the height of the board, range: [6, 15] inclusive

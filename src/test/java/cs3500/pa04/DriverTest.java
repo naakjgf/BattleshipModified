@@ -8,9 +8,6 @@ import org.junit.jupiter.api.Test;
  */
 class DriverTest {
 
-  //Only testing due to remembering hearing Professor say we don't need to test Driver but I don't
-  //want to risk it based on what I "remember" hearing. If it was unnecessary, I apologize. Maybe it
-  //could be looked at as an attempt at getting one of the other game results to occur in testing.
   @Test
   void mainTest() {
     String[] args = new String[0];
@@ -24,4 +21,11 @@ class DriverTest {
     Driver.main(args);
   }
 
+  @Test
+  void mainTestWithMultipleArgs() {
+    String[] args = new String[2];
+    args[0] = "0.0.0.0";
+    args[1] = "35001";
+    Driver.main(args);
+  }
 }
