@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Our AIPlayer that will represent us in the competition
+ */
 public class CompetitionAiPlayer implements Player {
   private Board myBoard;
   private Board opponentBoard;
@@ -195,6 +198,16 @@ public class CompetitionAiPlayer implements Player {
     return opponentBoard;
   }
 
+  /**
+
+   Handles the "take-shots" request by checking the request method and generating a response with the current volley coordinates.
+
+   @param request The request message JSON.
+
+   @return The response message JSON containing the "take-shots" method and current volley coordinates.
+
+   @throws IllegalArgumentException If the request method is not "take-shots".
+   */
   public MessageJson handleTakeShotsRequest(MessageJson request) {
     // Check if the method is "take-shots"
     if (!request.messageName().equals("take-shots")) {
@@ -208,6 +221,16 @@ public class CompetitionAiPlayer implements Player {
   }
 
 
+  /**
+
+   Handles the "report-damage" request by checking the request method, extracting the opponent shots coordinates, reporting the damage, and generating a response with the hits coordinates.
+
+   @param request The request message JSON.
+
+   @return The response message JSON containing the "report-damage" method and hits coordinates.
+
+   @throws IllegalArgumentException If the request method is not "report-damage".
+   */
   public MessageJson handleReportDamageRequest(MessageJson request) {
     // Check if the method is "report-damage"
     if (!request.messageName().equals("report-damage")) {
@@ -225,6 +248,16 @@ public class CompetitionAiPlayer implements Player {
     return JsonPlayerHandler.createResponseWithCoordinates("report-damage", hits);
   }
 
+  /**
+
+   Handles the "successful-hits" request by checking the request method, extracting the successful hits coordinates, handling the hits, and generating an empty response.
+
+   @param request The request message JSON.
+
+   @return The response message JSON containing the "successful-hits" method and no coordinates.
+
+   @throws IllegalArgumentException If the request method is not "successful-hits".
+   */
   public MessageJson handleSuccessfulHitsRequest(MessageJson request) {
     // Check if the method is "successful-hits"
     if (!request.messageName().equals("successful-hits")) {
@@ -242,6 +275,16 @@ public class CompetitionAiPlayer implements Player {
     return JsonPlayerHandler.createEmptyResponse("successful-hits");
   }
 
+  /**
+
+   Handles the "end-game" request by checking the request method, extracting the game result and reason, ending the game, and generating an empty response.
+
+   @param request The request message JSON.
+
+   @return The response message JSON containing the "end-game" method and no coordinates.
+
+   @throws IllegalArgumentException If the request method is not "end-game".
+   */
   public MessageJson handleEndGameRequest(MessageJson request) {
     // Check if the method is "end-game"
     if (!request.messageName().equals("end-game")) {
