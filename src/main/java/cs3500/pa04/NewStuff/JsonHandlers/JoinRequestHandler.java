@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class JoinRequestHandler {
 
+
   public MessageJson handleJoinRequest() {
     ObjectMapper mapper = new ObjectMapper();
     ObjectNode arguments = mapper.createObjectNode();

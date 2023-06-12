@@ -39,7 +39,6 @@ public class CompetitionAiPlayer implements Player {
    * @param boardWidth  the width of the board to shoot at.
    */
   public void decideCurrentVolley(int boardHeight, int boardWidth) {
-    DecideVolley volley = new DecideVolley();
     this.currentVolley = new ArrayList<>();
     int tilesLeft = opponentBoard.getTilesLeft();
 
