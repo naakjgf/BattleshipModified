@@ -3,10 +3,9 @@ package cs3500.pa04.view;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import cs3500.pa04.model.Ship.ShipType;
+import cs3500.pa04.model.ship.ShipType;
 import java.io.ByteArrayInputStream;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,15 +35,15 @@ class GameViewTest {
 
   @Test
   void testGetShipTypes() {
-    String simulatedUserInput = "\n-1\n\n0\n2\n2\n2\n\n1\n1\n1\n1\n1\n1\n1\n2\n1\n2\n2\n1";
     String simulatedUserInput2 = "\n1\n1\n2\n3\n";
-    Scanner scanner = new Scanner(new ByteArrayInputStream(simulatedUserInput.getBytes()));
     Scanner scanner2 = new Scanner(new ByteArrayInputStream(simulatedUserInput2.getBytes()));
-    Map<ShipType, Integer> shipTypes = gameView.getShipTypes(scanner, 4);
     Map<ShipType, Integer> shipTypes2 = gameView.getShipTypes(scanner2, 6);
     assertEquals(Integer.valueOf(1), shipTypes2.get(ShipType.CARRIER));
     assertEquals(Integer.valueOf(1), shipTypes2.get(ShipType.BATTLESHIP));
     assertEquals(Integer.valueOf(2), shipTypes2.get(ShipType.DESTROYER));
+    String simulatedUserInput = "\n-1\n\n0\n2\n2\n2\n\n1\n1\n1\n1\n1\n1\n1\n2\n1\n2\n2\n1";
+    Scanner scanner = new Scanner(new ByteArrayInputStream(simulatedUserInput.getBytes()));
+    Map<ShipType, Integer> shipTypes = gameView.getShipTypes(scanner, 4);
     assertEquals(Integer.valueOf(1), shipTypes.get(ShipType.SUBMARINE));
     assertEquals(Integer.valueOf(1), shipTypes.get(ShipType.DESTROYER));
     assertEquals(Integer.valueOf(1), shipTypes.get(ShipType.BATTLESHIP));

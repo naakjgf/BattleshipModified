@@ -4,12 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import cs3500.pa04.model.Coord.Coord;
-import cs3500.pa04.model.Coord.CoordStatus;
-import cs3500.pa04.model.Ship.Orientation;
-import cs3500.pa04.model.Ship.Ship;
-import cs3500.pa04.model.Ship.ShipStatus;
-import cs3500.pa04.model.Ship.ShipType;
+import cs3500.pa04.model.coord.Coord;
+import cs3500.pa04.model.coord.CoordStatus;
+import cs3500.pa04.model.ship.Orientation;
+import cs3500.pa04.model.ship.Ship;
+import cs3500.pa04.model.ship.ShipStatus;
+import cs3500.pa04.model.ship.ShipType;
 import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

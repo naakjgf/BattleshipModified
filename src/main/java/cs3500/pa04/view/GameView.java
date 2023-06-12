@@ -1,6 +1,6 @@
 package cs3500.pa04.view;
 
-import cs3500.pa04.model.Ship.ShipType;
+import cs3500.pa04.model.ship.ShipType;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -34,6 +34,7 @@ public class GameView {
    * @return a map of the ship types to the number of each ship type.
    */
   public Map<ShipType, Integer> getShipTypes(Scanner scanner, int numberOfShips) {
+    System.out.println("You have " + numberOfShips + " ships to place.");
     HashMap<ShipType, Integer> returnMap = new HashMap<>();
     int constantNumberOfShips = numberOfShips;
     for (ShipType shipType : ShipType.values()) {

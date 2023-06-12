@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import cs3500.pa04.model.Coord.Coord;
-import cs3500.pa04.model.Coord.CoordStatus;
+import cs3500.pa04.model.coord.Coord;
+import cs3500.pa04.model.coord.CoordStatus;
 import org.junit.jupiter.api.Test;
 
 /**
